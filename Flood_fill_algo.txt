@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void find(vector<vector<int>>& ans,int sr,int sc,int &color,int &o_color){
+         if (sr < 0 || sc < 0 || sr >= ans.size() || sc >= ans[0].size())
+            return;
+        
+        if (ans[sr][sc] != o_color)
+            return;
+
+        ans[sr][sc] = color;
+
+        find(ans, sr - 1, sc, color, o_color); 
+        find(ans, sr + 1, sc, color, o_color); 
+        find(ans, sr, sc - 1, color, o_color); 
+        find(ans, sr, sc + 1, color, o_color); 
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        vector<vector<int>> ans = image;
+        int o_color = ans[sr][sc];
+        if(o_color == color) return ans;
+        find(ans,sr,sc,color,o_color);
+        return ans;
+    }
+};
