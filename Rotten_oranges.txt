@@ -1,0 +1,48 @@
+class Solution {
+public:
+    void find(int row,int col,vector<vector<int>>& mat,vector<vector<int>>& visited,               int &maxval){
+       queue<pair<pair<int,int>,int>> q;
+       for(int i = 0;i < row;i++){
+        for(int j = 0;j < col;j++){
+            if(mat[i][j] == 2){
+                q.push({{i,j},0});
+                visited[i][j] = 1;
+            }
+        }
+       }
+        int rowdis[] = {-1,0,+1,0};
+        int coldis[] = {0,+1,0,-1};
+       while(!q.empty()){
+         int currrow = q.front().first.first;
+         int currcol = q.front().first.second;
+         int steps = q.front().second;
+         q.pop();
+         maxval = max(maxval,steps);
+
+         for(int i = 0;i < 4;i++){
+            int newrow = currrow + rowdis[i];
+            int newcol = currcol + coldis[i];
+
+            if(newrow >= 0 && newrow < row && newcol >= 0 && newcol < col && 
+            visited[newrow][newcol] == 0 && mat[newrow][newcol] == 1){
+                visited[newrow][newcol] = 1;
+                mat[newrow][newcol] = 2;
+                q.push({{newrow,newcol},steps + 1});
+            }
+         }
+       }
+    }
+    int orangesRotting(vector<vector<int>>& grid) {
+       int row = grid.size();
+       int col = grid[0].size();
+       int maxval = 0;
+       vector<vector<int>> visited(row, vector<int>(col, 0));
+       find(row,col,grid,visited,maxval);
+       for(int i = 0;i < row;i++){
+        for(int j = 0;j < col;j++){
+            if(grid[i][j] == 1) return -1;
+        }
+       }
+        return maxval;
+    }
+};
