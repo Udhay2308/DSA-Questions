@@ -1,0 +1,38 @@
+// Finding the lower bound of the given target...
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> lowerbond(vector<int> &arr,int target)
+{ 
+    int n = arr.size();
+    vector<int>ans = {arr[n - 1],-1};
+    int left = 0;
+    int right = n - 1;
+    while(left <= right){
+      int mid = (left + right)/2;
+      if(arr[mid] == target) return {arr[mid],arr[mid]};
+      else if(arr[mid] < target){
+        left = mid + 1;
+      }
+      else{
+       ans = {arr[mid - 1],arr[mid]};
+       right = mid - 1;
+      }
+    }
+    return ans;
+}
+int main()
+{
+    vector<int> arr = {3, 4, 7, 7,10, 12, 15,28};
+    // vector<int> arr = {1,2,2,3};
+
+    int target = 6;
+    vector<int>ans = lowerbond(arr,target);
+    cout<<"The floor and ceil values of given target in array are: "<<endl;
+    for (auto element : ans)
+    {  cout << "[";
+        cout<<element;
+       cout << "]";
+    }
+
+    return 0;
+}
