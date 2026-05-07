@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int split(vector<int> &arr,int current) {
+    int n = arr.size(); 
+    int subarray = 1;
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+       if((sum + arr[i]) <= current){
+       sum += arr[i];
+       }
+      else{
+        subarray++;
+        sum = arr[i];
+      }
+    }
+    return subarray;
+}
+int lsum(vector<int>& arr, int m) {
+    int n = arr.size();
+    int start = *max_element(arr.begin(),arr.end());
+    int end = accumulate(arr.begin(), arr.end(), 0);
+    for (int i = start;i <= end; i++)
+    {  
+        int ans = split(arr,i);
+        if(ans == m){
+            return i;
+        }
+    }
+    return -1;
+}
+int main()
+{
+    // vector<int> arr = {10,20,30,40};
+    vector<int> arr = {1,2,3,4,5};
+    // vector<int> arr = {3,5,1};
+    int m = 3;
+    int ans = lsum(arr,m);
+    cout << "The min max sum is: "<<ans;
+    return 0;
+}
+
