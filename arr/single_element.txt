@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+int find(vector<int>& arr){
+    int n = arr.size();
+    int left = 0;
+    int right = n - 1;
+    int ans;
+    while (left <= right){
+        int mid = (left + right)/2;
+        ans = mid;
+        if((mid-left+1) % 2 == 0){
+            left = mid + 1;
+        }
+        else{
+            right = mid - 1;
+        }
+    }
+        return arr[ans];
+    }
+   
+    int main(int argc, char const *argv[])
+    {
+        vector<int> arr = {1, 1, 2, 2, 3, 3, 5, 5, 6};
+        int ans = find(arr);
+        cout<<"The once occuring element in given array is: "<<ans;
+        return 0;
+    }
+    
