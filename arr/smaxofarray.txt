@@ -1,0 +1,58 @@
+// Second greatest and second smallest element of an array..
+#include<iostream>
+#include <algorithm>
+#include<climits>
+using namespace std;
+int main()
+{
+    int n;
+    cout<<"Enter the size of the array: ";
+    cin>>n;
+    int* arr = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+      cout<<"Enter the "<<i<<"th element of the array: ";
+      cin>>arr[i];
+    }
+    cout<<"Given array is: ";
+    for (int i = 0; i < n ; i++)
+    {
+       cout<<arr[i]<<" ";
+    }
+    int Max = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[Max] < arr[i])
+        {
+           Max = i;
+        }
+    }
+    int Min = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[Min] > arr[i])
+        {
+           Min = i;
+        }
+    }
+    int sec_max = INT_MIN;
+    int sec_min = INT_MAX;
+    for (int i = 0; i < n; i++)
+    {
+       if (arr[i] > sec_max && arr[i] != arr[Max])
+       {
+         sec_max = max(sec_max,arr[i]);
+       }
+       if (arr[i] < sec_min && arr[i] != arr[Min])
+       {
+         sec_min = min(sec_min,arr[i]);
+       }
+    }
+    
+    cout<<endl;
+    cout<<"The greatest element of the given array is: "<<arr[Max]<<endl;
+    cout<<"The smallest element of the given array is: "<<arr[Min]<<endl;
+    cout<<"The second largest element of the given array is: "<<sec_max<<endl;
+    cout<<"The second smallest element of the given array is: "<<sec_min<<endl;;
+    return 0;
+}
