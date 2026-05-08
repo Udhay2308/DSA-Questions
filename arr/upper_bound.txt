@@ -1,0 +1,41 @@
+// Finding the upper bound of the given target...
+#include <bits/stdc++.h>
+using namespace std;
+int lowerbond(vector<int> &arr,int target)
+{ 
+    int n = arr.size();
+    int ans = n;
+    int left = 0;
+    int right = n - 1;
+    while(left <= right){
+      int mid = (left + right)/2;
+      if(arr[mid] > target){
+        ans = mid;
+        right = mid - 1;
+      }
+      else{
+        left = mid + 1;
+      }
+    }
+    return ans;
+}
+int main()
+{
+    vector<int> arr = {3,5,8,15,19};
+    // vector<int> arr = {3,5,8,9,15,19};
+    // vector<int> arr = {1,2,2,3};
+    
+    
+    int target = 2;
+    int ans = lowerbond(arr,target);
+    if (ans == -1)
+    {
+        cout << "The element does not exist";
+    }
+    else
+    {
+        cout << "The element exist at index: " << ans;
+    }
+
+    return 0;
+}
