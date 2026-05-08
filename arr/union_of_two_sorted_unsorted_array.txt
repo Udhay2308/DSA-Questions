@@ -1,0 +1,194 @@
+// Union of two arrays (sorted/unsorted)....
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
+using namespace std;
+
+vector<int> common_elements(vector<int> &common, vector<int> &arr1, vector<int> &arr2)
+{
+    int size1 = arr1.size();
+    int size2 = arr2.size();
+    int size = max(size1, size2);
+    for (int i = 0; i < size1; i++)
+    {
+        if (arr1[i] == arr1[i - 1])
+        {
+            continue;
+        }
+
+            for (int j = 0; j < size2; j++)
+            {
+                if (arr1[i] == arr2[j])
+                {
+                    common.push_back(arr1[i]);
+                    break;
+                }
+            }
+    }
+    cout << "Common Array is: ";
+    for (int i = 0; i < common.size(); i++)
+    {
+        cout << common[i] << " ";
+    }
+    return common;
+}
+vector<int> unique1(vector<int>arr1,vector<int>&arr1_unique,vector<int>common){
+    for (int i = 0; i < arr1.size(); i++)
+    {  int count = 0;
+       for (int j = 0; j < common.size(); j++)
+       {
+         if (arr1[i] != common[j])
+         {
+           count++;
+         }
+         else{
+         break;
+         }
+       }
+       if (count == common.size())
+       {
+        arr1_unique.push_back(arr1[i]);
+       }  
+    }
+    cout << "Unique arr1 is: ";
+    for (int i = 0; i < arr1_unique.size(); i++)
+    {
+        cout << arr1_unique[i] << " ";
+    }
+    return arr1_unique;
+}
+vector<int> unique2(vector<int>arr2,vector<int>arr2_unique,vector<int>common){
+  for (int i = 0; i < arr2.size(); i++)
+    {  int count = 0;
+       for (int j = 0; j < common.size(); j++)
+       {
+         if (arr2[i] != common[j])
+         {
+           count++;
+         }
+         else{
+         break;
+         }
+       }
+       if (count == common.size())
+       {
+        arr2_unique.push_back(arr2[i]);
+       }  
+    }
+    cout << "Unique arr2 is: ";
+    for (int i = 0; i < arr2_unique.size(); i++)
+    {
+        cout << arr2_unique[i] << " ";
+    }
+    return arr2_unique;
+}
+void Union(vector<int>common,vector<int>arr1_unique,vector<int>arr2_unique,vector<int>&answer,vector<int>&temp_answer){
+   int i = 0;
+   int j = 0;
+   while (i < arr1_unique.size() && i < arr2_unique.size())
+   {
+     if (arr1_unique[i] < arr2_unique[j])
+     {
+       temp_answer.push_back(arr1_unique[i]);
+       i++;
+     }
+     else{
+       temp_answer.push_back(arr2_unique[j]);
+       j++;
+     }
+   }
+   while (i < arr1_unique.size())
+   {
+    temp_answer.push_back(arr1_unique[i]);
+       i++;
+   }
+   while (j < arr2_unique.size())
+   {
+    temp_answer.push_back(arr2_unique[j]);
+       j++;
+   }
+   cout<<endl;
+   cout << "Temp answer is: ";
+    for (int i = 0; i < temp_answer.size(); i++)
+    {
+        cout << temp_answer[i] << " ";
+    }
+
+    i = 0;
+    j = 0;
+   while (i < temp_answer.size() && i < common.size())
+   {
+     if (temp_answer[i] < common[j])
+     {
+       answer.push_back(temp_answer[i]);
+       i++;
+     }
+     else{
+       answer.push_back(common[j]);
+       j++;
+     }
+   }
+   while (i < temp_answer.size())
+   {
+    answer.push_back(temp_answer[i]);
+       i++;
+   }
+   while (j < common.size())
+   {
+    answer.push_back(common[j]);
+       j++;
+   }
+   cout<<endl;
+   cout << "Union is: ";
+    for (int i = 0; i < answer.size(); i++)
+    {
+        cout << answer[i] << " ";
+    }
+}
+
+int main()
+{
+    int n;
+    cout << "Enter the size of the first array: ";
+    cin >> n;
+    vector<int> arr1(n);
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Enter the " << i << "th element of the array: ";
+        cin >> arr1[i];
+    }
+    cout << "Array-1 is: ";
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr1[i] << " ";
+    }
+    cout << endl;
+    int m;
+    cout << "Enter the size of the second array: ";
+    cin >> m;
+    vector<int> arr2(m);
+    for (int i = 0; i < m; i++)
+    {
+        cout << "Enter the " << i << "th element of the array: ";
+        cin >> arr2[i];
+    }
+    cout << "Array-2 is: ";
+    for (int i = 0; i < m; i++)
+    {
+        cout << arr2[i] << " ";
+    }
+    cout << endl;
+    vector<int> common;
+    common = common_elements(common, arr1, arr2);
+    vector<int> arr1_unique;
+    cout << endl;
+    arr1_unique = unique1(arr1,arr1_unique,common);
+    vector<int> arr2_unique;
+    cout << endl;
+    arr2_unique = unique2(arr2,arr2_unique,common);
+    vector<int>temp_answer;
+    vector<int>answer;
+    Union(common,arr1_unique,arr2_unique,answer,temp_answer);
+    return 0;
+}
