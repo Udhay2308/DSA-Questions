@@ -1,0 +1,42 @@
+class Solution {
+  public:
+    vector<int> dijkstra(int V, vector<vector<int>> &edges, int src) {
+        //we use set over PQ to erase the old enteries of same node with larger wdist.
+        vector<pair<int,int>> adj[V];
+        for(auto it : edges){
+            adj[it[0]].push_back({it[1],it[2]});
+            adj[it[1]].push_back({it[0],it[2]});
+        }
+        // int dis[V];
+        // for(int i = 0;i < V;i++) dis[i] = 1e9;
+        vector<int> dis(V,1e9);
+        dis[src] = 0;
+        set<pair<int,int>> st;
+        st.insert({0,src});
+        while(!st.empty()){
+            auto it = *(st.begin());
+            int weight = it.first;
+            int node = it.second;
+            st.erase(it);
+            
+            for(auto it : adj[node]){
+                int edgeweight = it.second;
+                int adjnode = it.first;
+                if(dis[node] + edgeweight < dis[adjnode]){
+                    if(dis[adjnode] != 1e9){
+                        st.erase({dis[adjnode],adjnode});
+                    }
+                    dis[adjnode] = dis[node] + edgeweight;
+                    st.insert({dis[adjnode],adjnode});
+                }
+            }
+        }
+        vector<int> ans(V,-1);
+        for(int i = 0;i < V;i++){
+            if(dis[i] != 1e9){
+                ans[i] = dis[i];
+            }
+        }
+        return ans;
+    }
+};
