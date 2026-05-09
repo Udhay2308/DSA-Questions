@@ -1,0 +1,24 @@
+// Stock buy and sell...
+#include<bits/stdc++.h>
+using namespace std;
+
+void stock(int arr[],int n){
+  map<int,int>mp;
+  for (int i = 0; i < n; i++)
+  {
+     mp[arr[i]] = i;
+  }
+   auto first = *mp.begin();
+   auto last = *mp.rbegin();
+   cout<<"We will buy the stock on "<<first.second<<" day at prize "<<first.first<<endl;
+   cout<<"And we will sell that stock on "<<last.second<<" day at prize "<<last.first<<endl;
+   float profit = ((last.first-first.first)/first.first)*100;
+   cout<<"And our profit will be: "<<profit<<"%";
+}
+int main()
+{
+    int n = 5;
+    int arr[] = {70,100,80,60,50};
+    stock(arr,n);
+    return 0;
+}
