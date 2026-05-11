@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct node{
+    int data;
+    node * next;
+    node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+struct Stack{
+   node * top;
+   int size;
+   Stack(){
+    top = NULL;
+    size = 0;
+   }
+   void Push(int x){
+       node * newnode = new node(x);
+       newnode -> next = top;
+       top = newnode;
+       size++;
+       cout << "The newly pushed element is " << x << endl;
+    }
+     int Pop(){
+        if(top == NULL){
+            return -1;
+        }
+       int topdata = top -> data;
+       node * temp = top;
+       top = top -> next;
+       delete temp;
+       size--;
+       return topdata;
+    }
+    int Size(){
+        return size;
+    }
+    int Top(){
+        return top -> data;
+    }
+};
+int main(){
+    Stack s;
+    s.Push(23);
+    s.Push(7);
+    s.Push(3);
+    s.Push(78);
+    cout << "The size of the stack is " << s.Size() << endl;
+    cout << "The top of the stack is " << s.Top() << endl;
+    cout << "The deleted element is " << s.Pop() << endl;
+    cout << "The size of the stack is " << s.Size() << endl;
+    cout << "The top of the stack is " << s.Top() << endl;
+}
