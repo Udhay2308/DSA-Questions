@@ -1,0 +1,42 @@
+// Remove duplicate elements from the sorted array..
+#include<iostream>
+using namespace std;
+
+int remove_duplicates(int arr[],int n){
+  int i = 0;
+  for (int j = 1; j < n; j++)
+  {
+    if (arr[i] != arr[j])
+    {
+       i++;
+       arr[i] = arr[j];
+    }
+  }
+  return i + 1;
+}
+int main()
+{
+    int n;
+    cout<<"Enter the size of the array: ";
+    cin>>n;
+    int* arr = new int[n];
+    cout<<"Enter the elements of array in sorted manner (including duplicates)";
+    for (int i = 0; i < n; i++)
+    {
+      cout<<"Enter the "<<i<<"th element of the array: ";
+      cin>>arr[i];
+    }
+    cout<<"Given sorted array with duplicates is: ";
+    for (int i = 0; i < n ; i++)
+    {
+       cout<<arr[i]<<" ";
+    }
+    int end = remove_duplicates(arr,n);
+    cout<<endl;
+    cout<<"Array after removing the duplicates is: "<<endl;
+    for (int i = 0; i < end ; i++)
+    {
+       cout<<arr[i]<<" ";
+    }
+    return 0;
+}
