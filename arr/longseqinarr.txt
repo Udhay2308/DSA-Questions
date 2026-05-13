@@ -1,0 +1,27 @@
+// Finding the longest seq in array of consecutive terms...
+#include<bits/stdc++.h>
+using namespace std;
+
+    
+ int find(vector<int>& arr) {
+        map<int,int>mp;
+        int count = 1;
+       for (int i = 0; i < arr.size(); i++)
+       {
+         mp[arr[i]]++;
+       }
+       for (auto it1 : mp)
+       {
+         auto it2 = next(it1);
+       }
+       
+       
+    }
+    int main()
+    {
+        vector<int>arr = {1,1,1};
+        int k = 2;
+        int ans = find(arr);
+        cout<<"The count is: "<<ans;
+        return 0;
+    }
