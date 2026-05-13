@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int func(vector<int>&arr,int k){
+    int n = arr.size();
+    int ans = 0;
+    int a = 0;
+    for (int i = 1; i < n+k+1; i++)
+    {
+       if(find(arr.begin(), arr.end(), i) != arr.end()){
+        a++;
+        continue;
+       } 
+       ans = i;
+       if(i - a == k){
+        return ans;
+       }
+    }
+    return ans;
+    
+    }
+    int main()
+    {
+       vector<int>arr = {4,7,9,10};
+       int k = 1;
+        int ans = func(arr,k);
+        cout<<"The kth missing integer is: "<<ans;
+        return 0;
+    }
+    
