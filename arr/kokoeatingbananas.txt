@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int func(vector<int> &arr, int temp) {
+    int n = arr.size(); 
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += ceil((double)(arr[i]) / (double)(temp));
+    }
+    return sum;
+}
+
+int koko(vector<int>& arr, int hour) {
+    int n = arr.size();
+    int maxi = *max_element(arr.begin(), arr.end());
+    for (int i = 1; i <= maxi; i++)
+    {
+       int sum  = func(arr,i);
+       if(sum <= hour){
+        return i;
+       }
+    }
+    return -1;
+}
+int main()
+{
+    vector<int> arr = {25, 12, 8, 14, 19};
+    int hours = 5;
+    int ans = koko(arr, hours);
+    cout << "The Koko will eat "<<ans<<" bananas/hr";
+    return 0;
+}
+
