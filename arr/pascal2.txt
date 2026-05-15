@@ -1,0 +1,30 @@
+// Printing a particular row of the pascal triangle...
+#include<iostream>
+using namespace std;
+int find(int n,int r){
+    int res = 1;
+ for (int i = 0; i < r; i++)
+ {
+  res = res * (n-i);
+  res = res / (i+1);
+ }
+ return res;
+}
+void result(int n){
+    int ans;
+    cout<<"The req row is: ";
+    for (int i = 0; i < n; i++)
+    {
+        ans = find(n-1,i);
+        cout<<ans<<" ";
+    }
+}
+int main()
+{
+    int row;
+    cout<<"Enter the row no: ";
+    cin>>row;
+    cout<<endl;
+    result(row);
+    return 0;
+}
