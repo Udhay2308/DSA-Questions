@@ -1,0 +1,26 @@
+// Printing a particular element of the pascal triangle...
+#include<iostream>
+using namespace std;
+int find(int n,int r){
+    int res = 1;
+ for (int i = 0; i < r; i++)
+ {
+  res = res * (n-i);
+  res = res / (i+1);
+ }
+ return res;
+}
+int main()
+{
+    int row;
+    cout<<"Enter the row: ";
+    cin>>row;
+    cout<<endl;
+    int col;
+    cout<<"Enter the col: ";
+    cin>>col;
+    cout<<endl;
+    int ans = find(row-1,col-1);
+    cout<<"The answer is: "<<ans;
+    return 0;
+}
