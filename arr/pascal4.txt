@@ -1,0 +1,38 @@
+// Printing the whole pascal's triangle...
+#include<iostream>
+#include<vector>
+using namespace std;
+vector<int> row(int rowIndex){
+    long long first = 1;
+        vector<int>ans;
+        ans.push_back(first);
+        for(int i = 1;i < rowIndex;i++){
+          first = first * (rowIndex - i);
+          first = first / (i);
+          ans.push_back(first);
+        }
+        return ans;
+}
+vector<vector<int>> result(int n){
+    vector<vector<int>> ans1;
+    for (int i = 1; i <= n; i++)
+    {
+       ans1.push_back(row(i));
+    }
+    return ans1;
+}
+int main()
+{
+    int row;
+    cout<<"Enter the row no: ";
+    cin>>row;
+    cout<<"The pascal trinagle is: "<<endl;
+    vector<vector<int>>ans1 = result(row);
+     for (const auto& it : ans1) {
+        for (const auto& element : it) {
+            cout << element << " "; 
+        }
+        cout << endl;  
+    }
+    return 0;
+}
