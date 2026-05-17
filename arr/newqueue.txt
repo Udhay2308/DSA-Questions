@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Queue{
+    int size;
+    int start;
+    int end;
+    int * arr;
+
+public :
+ Queue(){
+    size = 5;
+    start = -1;
+    end = -1;
+    arr = new int[size];
+}
+int peek(){
+    if(start == -1){
+        cout << "The queue is empty " << endl;
+    }
+    return arr[start];
+}
+int push(int x){
+    if(end == size - 1){
+        cout << "The stack is full " << endl;
+    }
+    if(end == -1){
+        start = 0;
+        end = 0;
+    }
+   else end = (end + 1) % size;
+    arr[end] = x;
+    cout << "Element pushed is "<< x << endl;
+}
+int pop(){
+    if(start == end == -1){
+        cout << "The stack is empty " << endl;
+    }
+    int a = arr[start];
+    if((end - start + 1) == 1){
+        start = -1;
+        end = -1;
+    }
+    else{
+        start = (start + 1) % size;
+        return a;
+    }
+}
+int Size(){
+    return end - start + 1;
+}
+};
+int main(){
+    Queue q;
+    q.push(23);
+    q.push(7);
+    q.push(27);
+    q.push(13);
+    cout << "Start of queue is before deleting any element " << q.peek() << endl;
+    cout << "The deleted element is " << q.pop() << endl;
+    cout << "Now the current start of the queue is  " << q.peek() << endl;
+    cout << "Currently the size of the stack is " << q.Size() << endl;
+}
