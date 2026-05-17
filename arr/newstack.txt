@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Stack{
+    int size;
+    int top;
+    int * arr;
+
+public :
+ Stack(){
+    size = 100;
+    top = -1;
+    arr = new int[size];
+}
+int Top(){
+    return arr[top];
+}
+int push(int x){
+   top++;
+   arr[top] = x;
+}
+int pop(){
+    int a = arr[top];
+    top--;
+    return a;
+}
+int Size(){
+    return top + 1;
+}
+};
+int main(){
+    Stack s;
+    s.push(23);
+    s.push(7);
+    cout << "Top of stack is before deleting any element " << s.Top() << endl;
+    cout << "The deleted element is " << s.pop() << endl;
+    cout << "Currently the size of the stack is " << s.Size() << endl;
+}
