@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int possible(vector<int> &arr,int current,int m,int k) {
+    int n = arr.size(); 
+    int count = 0;
+    int numbers = 0;
+    for (int i = 0; i < n; i++) {
+       if(arr[i] <= current){
+        count++;
+       }
+       else{
+        numbers += count/k;
+        count = 0;
+       }
+    }
+    numbers += count/k;
+    if(numbers >= m) return current;
+    else{
+        return -1;
+    }
+}
+
+int bouq(vector<int>& arr, int m,int k) {
+    int n = arr.size();
+    if(m*k > n) return -1;
+    int mini = *min_element(arr.begin(), arr.end());
+    int maxi = *max_element(arr.begin(), arr.end());
+    for (int i = mini; i <= maxi; i++)
+    {
+       int ans  = possible(arr,i,m,k);
+       if(ans != -1) return ans;
+    }
+    return -1;
+}
+int main()
+{
+    vector<int> arr = {7, 7, 7, 7, 13, 11, 12, 23};
+    int m = 2;
+    int k = 3;
+    int ans = bouq(arr,m,k);
+    cout << "We are able to make the req bouquets on "<<ans<<" day";
+    return 0;
+}
+
